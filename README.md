@@ -1,28 +1,138 @@
-In this DevOps task, you need to build and deploy a full-stack CRUD application using the MEAN stack (MongoDB, Express, Angular 15, and Node.js). The backend will be developed with Node.js and Express to provide REST APIs, connecting to a MongoDB database. The frontend will be an Angular application utilizing HTTPClient for communication.  
+🚀 Discover Dollar – DevOps Internship Assignment
+📌 Project Overview
 
-The application will manage a collection of tutorials, where each tutorial includes an ID, title, description, and published status. Users will be able to create, retrieve, update, and delete tutorials. Additionally, a search box will allow users to find tutorials by title.
+This project demonstrates containerization, CI/CD automation, and cloud deployment of a full-stack MEAN (MongoDB, Express, Angular, Node.js) application.
 
-## Project setup
+The application is deployed on AWS EC2 using:
 
-### Node.js Server
+Docker
 
-cd backend
+Docker Compose
 
-npm install
+Jenkins (CI/CD)
 
-You can update the MongoDB credentials by modifying the `db.config.js` file located in `app/config/`.
+Nginx reverse proxy
 
-Run `node server.js`
+☁ Step 1: Create EC2 Instance
 
-### Angular Client
+Launch EC2 instance
 
-cd frontend
+Select Ubuntu 22.04 LTS
 
-npm install
+Instance type: c7i-flex.large
 
-Run `ng serve --port 8081`
+Storage: 20 GB
 
-You can modify the `src/app/services/tutorial.service.ts` file to adjust how the frontend interacts with the backend.
+Configure Security Group to allow:
 
-Navigate to `http://localhost:8081/`
-.
+All traffic allowed (for testing purpose)
+
+🛠 Step 2: Install Required Software
+Update System
+sudo apt update
+Install Java (Required for Jenkins)
+sudo apt install openjdk-17-jdk -y
+
+Verify:
+
+java -version
+Install Git
+sudo apt install git -y
+
+Verify:
+
+git --version
+Install Docker
+sudo apt install docker.io -y
+sudo systemctl start docker
+sudo systemctl enable docker
+
+Add user to docker group:
+
+sudo usermod -aG docker $USER
+
+Logout and login again.
+
+Install Docker Compose
+sudo apt install docker-compose -y
+
+Verify:
+
+docker-compose --version
+Install Jenkins
+sudo apt install jenkins -y
+
+Change Jenkins port to 9090:
+
+sudo nano /etc/default/jenkins
+
+Change:
+
+HTTP_PORT=9090
+
+Restart Jenkins:
+
+sudo systemctl restart jenkins
+
+Access Jenkins:
+
+http://<EC2-Public-IP>:9090
+
+Unlock Jenkins:
+
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+Install suggested plugins and complete setup.
+
+📂 Step 3: Clone Repository
+git clone https://github.com/<your-username>/discoverdollar-mean-devops.git
+cd discoverdollar-mean-devops
+🔁 Step 4: Setup Jenkins Pipeline
+
+Open Jenkins Dashboard
+
+Click New Item
+
+Select Pipeline
+
+Enter pipeline name (e.g., mean-app-pipeline)
+
+Click Configure
+
+Under Pipeline:
+
+Definition → Pipeline script from SCM
+
+SCM → Git
+
+Repository URL → Your GitHub repository
+
+Branch → main
+
+Script Path → Jenkinsfile
+
+Click Save.
+
+🚀 Step 5: Run Pipeline
+
+Click Build Now
+
+Pipeline performs:
+
+Clone repository
+
+Build backend Docker image
+
+Build frontend Docker image
+
+Push images to Docker Hub
+
+Deploy application using Docker Compose
+
+🌐 Step 6: Access Application
+
+Open browser:
+
+http://<EC2-Public-IP>
+
+Application runs on port 80 using Nginx reverse proxy.
