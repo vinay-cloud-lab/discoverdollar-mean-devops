@@ -127,7 +127,7 @@ Install suggested plugins and complete setup.
 # 📂 Step 3: Clone Repository
 
 ```bash
-git clone https://github.com/<your-username>/discoverdollar-mean-devops.git
+git clone https://github.com/vinay-cloud-lab/discoverdollar-mean-devops.git
 cd discoverdollar-mean-devops
 ```
 
@@ -207,13 +207,3 @@ http://<EC2-Public-IP>
 ```
 
 The application runs on port 80 using Nginx reverse proxy.
-
----
-
-# ✅ Final Result
-
-- Application containerized using Docker
-- CI/CD automated using Jenkins
-- Images pushed to Docker Hub
-- Deployment automated using Docker Compose
-- Accessible via EC2 public IP on port 80
